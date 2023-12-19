@@ -1,12 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author Adm
- */
 public class cadastroVIEW extends javax.swing.JFrame {
 
     /**
@@ -149,7 +143,12 @@ public class cadastroVIEW extends javax.swing.JFrame {
         produto.setStatus(status);
         
         ProdutosDAO produtodao = new ProdutosDAO();
-        produtodao.cadastrarProduto(produto);
+        try{
+           produtodao.cadastrarProduto(produto); 
+        }catch(SQLException ex){
+           JOptionPane.showMessageDialog(null,"Não foi possivel cadastrar o produto, erro: "+ex.getMessage(),null,2);
+        }
+        
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
