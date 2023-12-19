@@ -15,7 +15,7 @@ public class ProdutosDAO {
     ResultSet resultset;
     ArrayList<ProdutosDTO> listagem = new ArrayList<>();
     
-    public void cadastrarProduto (ProdutosDTO produto) throws SQLException{
+    public int cadastrarProduto (ProdutosDTO produto) throws SQLException{
         
         conn = new conectaDAO().connectDB();
         
@@ -26,10 +26,11 @@ public class ProdutosDAO {
             prep.setString(3, produto.getStatus());
             
             prep.executeUpdate();
-            
+            return 1;
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null,"Não foi possivel cadastrar o produto, erro: "+ex.getMessage(),null,2);
-        }
+            return 0;
+        }    
     }
     
     public ArrayList<ProdutosDTO> listarProdutos(){
