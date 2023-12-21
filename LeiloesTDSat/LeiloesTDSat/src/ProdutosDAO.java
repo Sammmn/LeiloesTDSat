@@ -15,7 +15,7 @@ public class ProdutosDAO {
     ResultSet resultset;
     ArrayList<ProdutosDTO> listagem = new ArrayList<>();
     
-    public int cadastrarProduto (ProdutosDTO produto) throws SQLException{
+    public int cadastrarProduto (ProdutosDTO produto) throws SQLException, ClassNotFoundException{
         
         conn = new conectaDAO().connectDB();
         
@@ -33,9 +33,29 @@ public class ProdutosDAO {
         }    
     }
     
-    public ArrayList<ProdutosDTO> listarProdutos(){
+    public ArrayList<ProdutosDTO> listarProdutos() throws ClassNotFoundException{
         
-        return listagem;
+        conn = new conectaDAO().connectDB();
+        ArrayList<ProdutosDTO> produtos = new ArrayList();
+        
+        try{
+            prep = conn.prepareStatement("SELECT * FROM produtos");
+            
+            ResultSet rs = prep.executeQuery();
+            
+            while(rs.next()){
+                ProdutosDTO p = new ProdutosDTO();
+                p.setId(rs.getInt("id"));
+                p.setNome(rs.getString("nome"));
+                p.setValor(rs.getInt("valor"));
+                p.setStatus(rs.getString("status"));
+                produtos.add(p);
+            }
+            return produtos;
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"Não foi possivel recuperar as informações dos produtos, erro: "+ex.getMessage(),null,2);
+            return null;
+        }  
     }
     
     

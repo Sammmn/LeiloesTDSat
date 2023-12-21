@@ -1,11 +1,11 @@
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class cadastroVIEW extends javax.swing.JFrame {
 
-    /**
-     * Creates new form cadastroVIEW
-     */
+    
     public cadastroVIEW() {
         initComponents();
     }
@@ -152,14 +152,26 @@ public class cadastroVIEW extends javax.swing.JFrame {
            }
         }catch(SQLException ex){
            JOptionPane.showMessageDialog(null,"Não foi possivel cadastrar o produto, erro: "+ex.getMessage(),null,2);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(cadastroVIEW.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
-        listagemVIEW listagem = new listagemVIEW(); 
+        listagemVIEW listagem = null; 
+        try {
+            listagem = new listagemVIEW();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(cadastroVIEW.class.getName()).log(Level.SEVERE, null, ex);
+        }
         listagem.setVisible(true);
+        try {
+            listagem.listarProdutos();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(cadastroVIEW.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnProdutosActionPerformed
 
     /**

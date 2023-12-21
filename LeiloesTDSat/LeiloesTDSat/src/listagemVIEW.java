@@ -1,6 +1,10 @@
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.sql.SQLException;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -13,10 +17,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class listagemVIEW extends javax.swing.JFrame {
 
-    /**
-     * Creates new form listagemVIEW
-     */
-    public listagemVIEW() {
+    public ProdutosDAO pDAO = new ProdutosDAO();
+    
+    public listagemVIEW() throws ClassNotFoundException {
         initComponents();
         listarProdutos();
     }
@@ -140,8 +143,12 @@ public class listagemVIEW extends javax.swing.JFrame {
         
         ProdutosDAO produtosdao = new ProdutosDAO();
         
-        //produtosdao.venderProduto(Integer.parseInt(id));
-        listarProdutos();
+        try {
+            //produtosdao.venderProduto(Integer.parseInt(id));
+            listarProdutos();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(listagemVIEW.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
@@ -183,7 +190,11 @@ public class listagemVIEW extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new listagemVIEW().setVisible(true);
+                try {
+                    new listagemVIEW().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(listagemVIEW.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -201,25 +212,19 @@ public class listagemVIEW extends javax.swing.JFrame {
     private javax.swing.JTable listaProdutos;
     // End of variables declaration//GEN-END:variables
 
-    private void listarProdutos(){
-        try {
-            ProdutosDAO produtosdao = new ProdutosDAO();
-            
-            DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel();
-            model.setNumRows(0);
-            
-            ArrayList<ProdutosDTO> listagem = produtosdao.listarProdutos();
-            
-            for(int i = 0; i < listagem.size(); i++){
-                model.addRow(new Object[]{
-                    listagem.get(i).getId(),
-                    listagem.get(i).getNome(),
-                    listagem.get(i).getValor(),
-                    listagem.get(i).getStatus()
-                });
-            }
-        } catch (Exception e) {
+    public void listarProdutos() throws ClassNotFoundException {
+        ArrayList<ProdutosDTO> listagem = pDAO.listarProdutos();
+        DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel();
+        model.setNumRows(0);
+
+        for (ProdutosDTO p : listagem) {
+            Object[] obj = new Object[]{
+                p.getId(),
+                p.getNome(),
+                p.getValor(),
+                p.getStatus()
+            };
+            model.addRow(obj);
         }
-    
     }
 }
