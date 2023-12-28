@@ -58,8 +58,44 @@ public class ProdutosDAO {
         }  
     }
     
-    
-    
+    public void venderProduto(int produtoid) throws ClassNotFoundException{
         
+        conn = new conectaDAO().connectDB();
+        
+        try{
+            prep = conn.prepareStatement("UPDATE produtos SET status = 'Vendido' WHERE id = ?");
+            prep.setInt(1, produtoid);
+            prep.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Venda realizada!",null,2);
+  
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Não foi possível realizar a venda, erro: "+ex.getMessage(),null,2);
+        }
+    }
+    
+    public ArrayList<ProdutosDTO> listarProdutosVendidos() throws ClassNotFoundException{
+        
+        conn = new conectaDAO().connectDB();
+        ArrayList<ProdutosDTO> produtos = new ArrayList();
+        
+        try{
+            prep = conn.prepareStatement("SELECT * FROM produtos WHERE status = 'Vendido'");
+            
+            ResultSet rs = prep.executeQuery();
+            
+            while(rs.next()){
+                ProdutosDTO p = new ProdutosDTO();
+                p.setId(rs.getInt("id"));
+                p.setNome(rs.getString("nome"));
+                p.setValor(rs.getInt("valor"));
+                p.setStatus(rs.getString("status"));
+                produtos.add(p);
+            }
+            return produtos;
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"Não foi possivel recuperar as informações dos produtos, erro: "+ex.getMessage(),null,2);
+            return null;
+        }  
+    } 
 }
 
