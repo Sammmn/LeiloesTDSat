@@ -58,8 +58,19 @@ public class ProdutosDAO {
         }  
     }
     
-    
-    
+    public void venderProduto(int produtoid) throws ClassNotFoundException{
         
+        conn = new conectaDAO().connectDB();
+        
+        try{
+            prep = conn.prepareStatement("UPDATE produtos SET status = 'Vendido' WHERE id = ?");
+            prep.setInt(1, produtoid);
+            prep.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Venda realizada!",null,2);
+  
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Não foi possível realizar a venda, erro: "+ex.getMessage(),null,2);
+        }
+    }            
 }
 

@@ -144,7 +144,7 @@ public class listagemVIEW extends javax.swing.JFrame {
         ProdutosDAO produtosdao = new ProdutosDAO();
         
         try {
-            //produtosdao.venderProduto(Integer.parseInt(id));
+            produtosdao.venderProduto(Integer.parseInt(id));
             listarProdutos();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(listagemVIEW.class.getName()).log(Level.SEVERE, null, ex);
