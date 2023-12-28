@@ -152,12 +152,12 @@ public class listagemVIEW extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
-        try {
+        /*try {
             vendasVIEW vendas = new vendasVIEW();
             vendas.setVisible(true);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(listagemVIEW.class.getName()).log(Level.SEVERE, null, ex);
-        }       
+        }*/       
     }//GEN-LAST:event_btnVendasActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
