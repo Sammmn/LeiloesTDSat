@@ -1,7 +1,0 @@
-Visto que o repositório local já está devidamente inicializado e possui um link para o repositório remoto, agora podemos fazer o push das alterações com os seguintes comandos:
-
-$ git add . --> Adiciona todas as alterações a fila de commit.
-
-$ git commit -m "Cadastro funcionando"/"Mensagem de erro e de sucesso"/outro --> Faço o commit das alterações feitas e adiciono uma mensagem sinalizando as alterações feitas.
-
-$ git push origin main --> Faço o push("upload"/"salvamento") das minhas alterações para o meu repositório remoto.
