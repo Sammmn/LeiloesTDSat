@@ -144,7 +144,7 @@ public class vendasVIEW extends javax.swing.JFrame {
     private javax.swing.JTable listaProdutos;
     // End of variables declaration//GEN-END:variables
 
-    /*public void listarProdutos() throws ClassNotFoundException {
+    public void listarProdutos() throws ClassNotFoundException {
         ArrayList<ProdutosDTO> listagem = pDAO.listarProdutosVendidos();
         DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel();
         model.setNumRows(0);
@@ -158,5 +158,5 @@ public class vendasVIEW extends javax.swing.JFrame {
             };
             model.addRow(obj);
         }
-    }*/
+    }
 }
